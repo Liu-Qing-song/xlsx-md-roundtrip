@@ -118,42 +118,66 @@ It also applies a few safety rules to reduce common Excel artifacts:
   - `openpyxl`
   - `pyyaml`
 
-Install:
+---
+
+## Installation
+
+To install the required dependencies, run the following command:
 
 ```bash
 pip install openpyxl pyyaml
+```
 
 ---
 
 ## Usage
-1) Export Excel to Markdown (YAML blueprint embedded)：
-bash: python xlsx_md_roundtrip.py --xlsx input.xlsx --md blueprint.md
 
-2) Rebuild Excel from Markdown：
-bash: python xlsx_md_roundtrip.py --from-md blueprint.md --xlsx-out rebuilt.xlsx
+### Export Excel to Markdown (YAML blueprint embedded)
+
+Run the following command to export an Excel file to a Markdown blueprint:
+
+```bash
+python xlsx_md_roundtrip.py --xlsx input.xlsx --md blueprint.md
+```
+
+### Rebuild Excel from Markdown
+
+To rebuild an Excel file from a Markdown blueprint, use:
+
+```bash
+python xlsx_md_roundtrip.py --from-md blueprint.md --xlsx-out rebuilt.xlsx
+```
 
 ---
 
-## Suggested AI workflow (practical example)
-1.Export:
-bash: python xlsx_md_roundtrip.py --xlsx report.xlsx --md report.blueprint.md
+## Suggested AI Workflow (Practical Example)
 
-2.Ask an AI assistant (give it the .md file) something like:
-“In sheet Summary, change the header in A1 to Quarterly Report and set it bold.”
-“In sheet Pricing, update the values in column C using this list, keep existing formatting.”
-“Add a new row after row 10, copy formulas and borders from row 10.”
+1. **Export**:
+   ```bash
+   python xlsx_md_roundtrip.py --xlsx report.xlsx --md report.blueprint.md
+   ```
 
-3.Rebuild:
-bash: python xlsx_md_roundtrip.py --from-md report.blueprint.md --xlsx-out report.updated.xlsx
+2. **Ask an AI assistant** (provide the `.md` file) with instructions like:
+   - "In sheet `Summary`, change the header in `A1` to `Quarterly Report` and set it bold."
+   - "In sheet `Pricing`, update the values in column `C` using this list, keeping existing formatting."
+   - "Add a new row after row 10, copying formulas and borders from row 10."
+
+3. **Rebuild**:
+   ```bash
+   python xlsx_md_roundtrip.py --from-md report.blueprint.md --xlsx-out report.updated.xlsx
+   ```
 
 ---
 
 ## Limitations / Non-goals
-This tool does not aim to perfectly preserve every Excel feature (charts, pivot tables, macros/VBA, external connections, complex conditional formatting, etc.).
+
+This tool does not aim to perfectly preserve every Excel feature (e.g., charts, pivot tables, macros/VBA, external connections, complex conditional formatting, etc.).
+
 Very large workbooks can produce very large Markdown/YAML files; consider working per-sheet or per-range.
 
 ---
 
 ## Project Structure
-xlsx_md_roundtrip.py - main script (export + rebuild)
-README.md - documentation
+
+- `xlsx_md_roundtrip.py` - main script (export + rebuild)
+- `README.md` - documentation
